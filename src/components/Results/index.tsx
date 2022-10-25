@@ -7,9 +7,14 @@ type ResultsProps = {
 };
 
 export const Results = ({ searchParams }: ResultsProps) => {
-  const { data, error, isLoading } = useNasaQuery(searchParams);
+  const { data, error, isFetching } = useNasaQuery(searchParams);
 
-  return <Text>Results goes here</Text>;
+  return (
+    <>
+      <Text>results go here</Text>
+      <Text>{JSON.stringify(data)}</Text>;
+    </>
+  );
 };
 
 export default Results;
