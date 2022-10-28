@@ -3,11 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import urlNasaSearch from "../services/nasa";
 import { NasaResponse, NasaSearchParams } from "../types";
 
-export const useNasaQuery = (params: NasaSearchParams) => {
-  const urlNasaSearchUrl = urlNasaSearch(params);
+export const useNasaQuery = (params: NasaSearchParams | undefined) => {
+  const urlNasaSearchUrl = params ? urlNasaSearch(params) : "";
 
-  return useQuery<NasaResponse>(["nasaSearch"], () =>
-    fetch(urlNasaSearchUrl).then((res) => res.json())
+  // if params is empty then no request happens
+  return useQuery<NasaResponse>(
+    ["nasaSearch"],
+    () => fetch(urlNasaSearchUrl).then((res) => res.json()),
+    { enabled: !!params }
   );
 };
 
