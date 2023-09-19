@@ -87,10 +87,6 @@ An error message should appear below the field
 
 Submit button should change to a disabled state and label should read “Submitting…” when user clicks the submit button to submit the form. The button should return to and enabled state with label “Submit” when the API responds.
 
-## Tests
-
-Ensure your application has adequate test coverage. It is up to you what test library you use, however Jest and React Testing Library has already been configured. See src/components/HomePage/homePage.test.tsx
-
 ---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
