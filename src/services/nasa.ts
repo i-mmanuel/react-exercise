@@ -14,9 +14,7 @@ export const urlNasaSearch = ({
       !Number.isNaN(yearStart) && { year_start: `${yearStart}` }),
   };
   const paramsString = new URLSearchParams(
-    paramsObjectWithSnakeCaseKeys
+    paramsObjectWithSnakeCaseKeys,
   ).toString();
   return `${NASA_API_URL}?${paramsString}`;
 };
-
-export default urlNasaSearch;

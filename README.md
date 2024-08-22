@@ -2,28 +2,25 @@
 
 ## Task details
 
-- We will be testing your ability to understand an existing React/Typescript codebase understand what is already and build what is not
-- You will be building a form using the CRUK React Component Library and a form library of your choice such React Hook Form or Formik and a validation library of your choice such as Zod or Yup.
-- This form which will fetch assets from the NASA Images and Video Library API The fields described below will modify the search query.
+- We will be testing your ability to understand an existing React/Typescript codebase, find what is already built, and what is not.
+- You will be building a form using the CRUK React Component Library controlled by ReactHookForm which uses a Zod validation schema.
+- This form which will fetch items from the NASA Library API. The "Form fields" section below describes the fields and their validation which should modify the search query.
 - The media returned should be displayed in list below the form, these may be images, video, or audio clips. It is up to you how you display these
-- The user should only see the first 10 items on the page. If you have time, getting this working with some form pagination is a stretch target.
+- The user should only see the first 10 items on the page. If you have time enabling pagination is a stretch target.
 - Code must be clean and production ready, quality is better than quantity.
+- You can test your application with Playwright, see src/test folder for example tests and see all the scripts available in the package.json
 - Feel free to edit this readme or add a new readme file for any additional information, such as what you might do improve your application in the future.
-- Please do not attempt to push to this repo, ideally we would like you to create your own fork.
+- Please do not attempt to push to this repo, please create your own fork.
 
 ## Tools to be used
 
+- NextJS (server) https://nextjs.org/docs
+- NASA Images and Video Library API https://api.nasa.gov/
 - CRUK React Component Library Storybook site: https://master.d28a8la187lo73.amplifyapp.com/
 - CRUK React Component Library Package: https://www.npmjs.com/package/@cruk/cruk-react-components
-- Styled Components (What the CRUK Component Library was built with) https://styled-components.com/docs
-- NASA Images and Video Library API https://api.nasa.gov/
-
-## Optional Libraries
-
-- React Hook Form (Forms): https://react-hook-form.com/
-- Formik (Forms): https://formik.org/docs/overview
-- Zod (Validation) https://zod.dev/
-- Yup (Validation) https://github.com/jquense/yup
+- Styled Components (what the CRUK Component Library was built with) https://styled-components.com/docs
+- React Hook Form (forms): https://react-hook-form.com/
+- Zod (validation) https://zod.dev/
 
 ## Form fields
 
@@ -83,31 +80,28 @@ An error message should appear below the field
 | min         | 1900                   | "Year start must be after 1900."        |
 | max         | current year           | "Year start must not be in the future." |
 
-### Submit button
-
-Submit button should change to a disabled state and label should read “Submitting…” when user clicks the submit button to submit the form. The button should return to and enabled state with label “Submit” when the API responds.
-
----
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to view your application.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+The page auto-updates as you edit the files.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Testing
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+To test your code run:
+
+```bash
+npm run test:debug
+```
+
+This will open up a browser window to show you your test in action
+The page will auto-update as you edit files.
 
 ## Learn More
 
