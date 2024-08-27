@@ -1,3 +1,5 @@
+"use client";
+
 import { Heading, Box } from "@cruk/cruk-react-components";
 import { List } from "./List";
 import { Form } from "./Form";

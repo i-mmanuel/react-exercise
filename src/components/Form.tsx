@@ -7,9 +7,7 @@ import { Dispatch, SetStateAction } from "react";
 import { NasaSearchParams } from "../types";
 
 export const formSchema = z.object({
-  // ////////////////////////////////
   // TODO: update validation schema here
-  // ////////////////////////////////
   demoField: z.string(),
 });
 
