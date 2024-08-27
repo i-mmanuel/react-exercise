@@ -54,7 +54,7 @@ An error message should appear below the field
 | Required  | true                        |
 | Type      | select                      |
 | Values    | [“audio”, “video”, “image”] |
-| Default   | none                        |
+| Default   | ""                          |
 
 ### Media types validation
 

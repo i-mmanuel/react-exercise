@@ -1,3 +1,5 @@
+"use client";
+
 import { Text } from "@cruk/cruk-react-components";
 import { NasaResponse, NasaSearchParams } from "../types";
 import { urlNasaSearch } from "../services/nasa";
