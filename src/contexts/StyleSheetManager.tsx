@@ -1,9 +1,18 @@
+"use client";
+
+import React, { useState } from "react";
+import { useServerInsertedHTML } from "next/navigation";
 import {
-  type IStyleSheetManager,
-  type ShouldForwardProp,
+  IStyleSheetManager,
+  ServerStyleSheet,
+  ShouldForwardProp,
   StyleSheetManager as SSM,
 } from "styled-components";
-import isPropValid from "@emotion/is-prop-valid";
+import isPropValid from "@emotion/is-prop-valid/dist/declarations/src";
+
+type StyledComponentsRegistryProps = {
+  children: React.ReactNode;
+};
 
 const shouldForwardPropFunc: ShouldForwardProp<"web"> = (propName, target) => {
   if (typeof target === "string") {
@@ -28,4 +37,26 @@ const StyleSheetManager = ({
   </SSM>
 );
 
-export default StyleSheetManager;
+export const StyledComponentsRegistry = ({
+  children,
+}: StyledComponentsRegistryProps) => {
+  const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
+
+  useServerInsertedHTML(() => {
+    const styles = styledComponentsStyleSheet.getStyleElement();
+    styledComponentsStyleSheet.instance.clearTag();
+    return <>{styles}</>;
+  });
+
+  if (typeof window !== "undefined") return <>{children}</>;
+
+  return (
+    <StyleSheetManager
+      shouldForwardProp={shouldForwardPropFunc}
+      enableVendorPrefixes={enableVendorPrefixes}
+      sheet={sheet}
+    >
+      {children}
+    </StyleSheetManager>
+  );
+};
