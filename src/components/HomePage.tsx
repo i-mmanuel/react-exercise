@@ -7,16 +7,15 @@ import { useState } from "react";
 import { NasaSearchParams } from "../types";
 
 export const HomePage = () => {
-  const [values, setValues] = useState<NasaSearchParams>();
-  console.log(values);
+	const [values, setValues] = useState<NasaSearchParams>();
 
-  return (
-    <Box marginTop="s" paddingTop="s">
-      <Heading h1>React Exercise</Heading>
-      <Form setValues={setValues} />
-      <List />
-    </Box>
-  );
+	return (
+		<Box marginTop="s" paddingTop="s">
+			<Heading h1>React Exercise</Heading>
+			<Form setValues={setValues} />
+			<List values={values} />
+		</Box>
+	);
 };
 
 export default HomePage;

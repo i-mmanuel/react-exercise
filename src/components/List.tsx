@@ -1,20 +1,16 @@
 "use client";
 
-import { Collapse, Loader, ErrorText } from "@cruk/cruk-react-components";
+import { Collapse, Loader, Text, ErrorText } from "@cruk/cruk-react-components";
 import { NasaResponse, NasaSearchParams } from "../types";
 import { urlNasaSearch } from "../services/nasa";
 import { useQuery } from "@tanstack/react-query";
 
-export function List() {
-	const values: NasaSearchParams = {
-		keywords: "moon",
-		mediaType: "audio",
-		yearStart: 2000,
-	};
+export function List({ values }: { values: NasaSearchParams | undefined }) {
+	const urlNasaSearchUrl = values ? urlNasaSearch(values) : "";
 
-	const urlNasaSearchUrl = values ? urlNasaSearch(values as NasaSearchParams) : "";
-
-	console.log(urlNasaSearchUrl);
+	if (!values) {
+		return null;
+	}
 
 	const { data, isLoading, error } = useQuery<NasaResponse>(
 		["nasaSearch", values],
@@ -22,7 +18,7 @@ export function List() {
 		{ enabled: !!urlNasaSearchUrl.length }
 	);
 
-	if (isLoading) {
+	if (isLoading && values.keywords.length > 0) {
 		return <Loader />;
 	}
 
@@ -31,16 +27,19 @@ export function List() {
 	}
 
 	// TODO somehow render results
-	const showNasaData = () =>
-		!!data &&
-		data.collection.items.map(
-			item =>
-				item.data[0] && (
+	const showNasaData = () => {
+		if (data && data.collection.items.length > 0) {
+			return data.collection.items.map(item =>
+				item.data[0] ? (
 					<Collapse id={item.data[0].nasa_id} key={item.data[0].nasa_id} headerTitleText={item.data[0].title}>
 						{item.data[0].description}
 					</Collapse>
-				)
-		);
+				) : null
+			);
+		} else {
+			return <ErrorText>No items found.</ErrorText>;
+		}
+	};
 
 	return <>{!!data && showNasaData()}</>;
 }
