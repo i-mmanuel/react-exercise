@@ -30,7 +30,7 @@ export type DataType = {
 	location: string;
 	nasa_id: string;
 	date_created: string;
-	media_type: string;
+	media_type: "audio" | "video" | "image";
 	description: string;
 };
 
