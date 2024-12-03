@@ -59,18 +59,16 @@ export function Form({ setValues }: { setValues: Dispatch<SetStateAction<NasaSea
 		e?.preventDefault();
 
 		// TODO do something on sumbit
-		const formattedData: NasaSearchParams = { ...data, yearStart: parseInt(data.yearStart) };
+		const formattedData: NasaSearchParams = { ...data, yearStart: parseInt(data.yearStart), page: 1, pageSize: 10 };
 		setValues(formattedData);
 	};
 
 	return (
 		<form noValidate onSubmit={handleSubmit(onSubmit)}>
-			{/* Keywords Field */}
 			<Box marginBottom="m">
 				<TextField {...register("keywords")} errorMessage={errors.keywords?.message} label="Keywords" required />
 			</Box>
 
-			{/* Media Type Field */}
 			<Box marginBottom="m">
 				<Select {...register("mediaType")} errorMessage={errors.mediaType?.message} label="Media Type" required>
 					<option value="">Select Media Type</option>
@@ -80,12 +78,10 @@ export function Form({ setValues }: { setValues: Dispatch<SetStateAction<NasaSea
 				</Select>
 			</Box>
 
-			{/* Year Start Field */}
 			<Box marginBottom="m">
 				<TextField {...register("yearStart")} errorMessage={errors.yearStart?.message} label="Year Start" />
 			</Box>
 
-			{/* Submit Button */}
 			<Box marginBottom="m">
 				<Button type="submit">Submit</Button>
 			</Box>
