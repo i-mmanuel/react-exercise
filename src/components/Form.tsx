@@ -20,14 +20,20 @@ export const formSchema = z.object({
 	}),
 
 	// Year start field validation (optional, number, min/max year)
-	yearStart: z.string().refine(
-		val => {
-			if (val && isNaN(Number(val))) return false; // Ensure it's a valid number
-			const year = Number(val);
-			return year >= 1900 && year <= new Date().getFullYear(); // Check range
-		},
-		{ message: `Year start must be between 1900 and ${new Date().getFullYear()}.` }
-	),
+	yearStart: z
+		.string()
+		.optional()
+		.refine(
+			val => {
+				if (!val) return true; // If no value, it's valid (since it's optional)
+				if (isNaN(Number(val))) return false; // Ensure it's a valid number
+				const year = Number(val);
+				return year >= 1900 && year <= new Date().getFullYear(); // Check range
+			},
+			{
+				message: `Year start must be between 1900 and ${new Date().getFullYear()}.`,
+			}
+		),
 });
 
 export type FormValues = z.infer<typeof formSchema>;
@@ -59,7 +65,12 @@ export function Form({ setValues }: { setValues: Dispatch<SetStateAction<NasaSea
 		e?.preventDefault();
 
 		// TODO do something on sumbit
-		const formattedData: NasaSearchParams = { ...data, yearStart: parseInt(data.yearStart), page: 1, pageSize: 10 };
+		const formattedData: NasaSearchParams = {
+			...data,
+			yearStart: data.yearStart ? parseInt(data.yearStart) : undefined,
+			page: 1,
+			pageSize: 10,
+		};
 		setValues(formattedData);
 	};
 

@@ -1,6 +1,6 @@
 export type NasaSearchParams = {
 	keywords: string;
-	yearStart: number;
+	yearStart: number | undefined;
 	mediaType: "audio" | "video" | "image";
 	page: number;
 	pageSize: number;
